@@ -39,6 +39,11 @@ export const EmbedChainInfos: ChainInfo[] = [
         coinMinimalDenom: "umed",
         coinDecimals: 6,
         coinGeckoId: "medibloc",
+        gasPriceStep: {
+          low: 5,
+          average: 6,
+          high: 7,
+        },
       },
     ],
     features: ["ibc-transfer", "ibc-go"],
