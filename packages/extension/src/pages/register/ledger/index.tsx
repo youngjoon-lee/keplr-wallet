@@ -47,7 +47,7 @@ export const ImportLedgerPage: FunctionComponent<{
 }> = observer(({ registerConfig }) => {
   const intl = useIntl();
 
-  const bip44Option = useBIP44Option(118);
+  const bip44Option = useBIP44Option(371);
 
   const { register, handleSubmit, getValues, errors } = useForm<FormData>({
     defaultValues: {

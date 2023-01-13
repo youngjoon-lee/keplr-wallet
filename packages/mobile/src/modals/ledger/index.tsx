@@ -368,7 +368,7 @@ const LedgerNanoBLESelector: FunctionComponent<{
       const ledger = await Ledger.init(
         () => TransportBLE.open(deviceId),
         undefined,
-        LedgerApp.Cosmos
+        LedgerApp.MediBloc
       );
       await ledger.close();
 

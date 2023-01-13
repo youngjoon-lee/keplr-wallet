@@ -38,7 +38,7 @@ export const NewLedgerScreen: FunctionComponent = observer(() => {
   const smartNavigation = useSmartNavigation();
 
   const registerConfig: RegisterConfig = route.params.registerConfig;
-  const bip44Option = useBIP44Option(118);
+  const bip44Option = useBIP44Option(371);
   const [mode] = useState(registerConfig.mode);
 
   const {

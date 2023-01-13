@@ -14,7 +14,7 @@ import { domainHash, messageHash } from "../keyring/utils";
 const CosmosApp: any = require("ledger-cosmos-js").default;
 
 export enum LedgerApp {
-  Cosmos = "cosmos",
+  MediBloc = "medibloc",
   Ethereum = "ethereum",
 }
 
@@ -43,7 +43,7 @@ export class LedgerInitError extends Error {
 
 export class Ledger {
   constructor(
-    private readonly cosmosApp: any,
+    private readonly mediblocApp: any,
     private ethereumApp: Eth | undefined = undefined
   ) {}
 
@@ -65,9 +65,9 @@ export class Ledger {
         return new Ledger(null, ethereumApp);
       }
 
-      const cosmosApp = new CosmosApp(transport);
+      const mediblocApp = new CosmosApp(transport);
 
-      const ledger = new Ledger(cosmosApp, undefined);
+      const ledger = new Ledger(mediblocApp, undefined);
       const versionResponse = await ledger.getVersion();
 
       // In this case, device is on screen saver.
@@ -98,11 +98,11 @@ export class Ledger {
     targetId: string;
     testMode: boolean;
   }> {
-    if (!this.cosmosApp) {
-      throw new KeplrError("ledger", 100, "Cosmos App not initialized");
+    if (!this.mediblocApp) {
+      throw new KeplrError("ledger", 100, "MediBloc App not initialized");
     }
 
-    const result = await this.cosmosApp.getVersion();
+    const result = await this.mediblocApp.getVersion();
 
     if (result.error_message !== "No errors") {
       throw new Error(result.error_message);
@@ -136,12 +136,12 @@ export class Ledger {
         throw new Error(e);
       }
     } else {
-      if (!this.cosmosApp) {
-        throw new KeplrError("ledger", 100, "Cosmos App not initialized");
+      if (!this.mediblocApp) {
+        throw new KeplrError("ledger", 100, "MediBloc App not initialized");
       }
 
-      const result = await this.cosmosApp.publicKey(
-        Ledger.createPath(118, fields)
+      const result = await this.mediblocApp.publicKey(
+        Ledger.createPath(371, fields)
       );
       if (result.error_message !== "No errors") {
         throw new Error(result.error_message);
@@ -152,12 +152,12 @@ export class Ledger {
   }
 
   async sign(fields: BIP44HDPath, message: Uint8Array): Promise<Uint8Array> {
-    if (!this.cosmosApp) {
-      throw new KeplrError("ledger", 100, "Cosmos App not initialized");
+    if (!this.mediblocApp) {
+      throw new KeplrError("ledger", 100, "MediBloc App not initialized");
     }
 
-    const result = await this.cosmosApp.sign(
-      Ledger.createPath(118, fields),
+    const result = await this.mediblocApp.sign(
+      Ledger.createPath(371, fields),
       message
     );
     if (result.error_message !== "No errors") {
@@ -224,8 +224,8 @@ export class Ledger {
   }
 
   async close(): Promise<void> {
-    if (this.cosmosApp) {
-      await this.cosmosApp.transport.close();
+    if (this.mediblocApp) {
+      await this.mediblocApp.transport.close();
     }
     if (this.ethereumApp) {
       await this.ethereumApp.transport.close();

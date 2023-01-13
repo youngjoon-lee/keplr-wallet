@@ -70,7 +70,7 @@ export class LedgerService {
     expectedPubKey: Uint8Array,
     message: Uint8Array
   ): Promise<Uint8Array> {
-    const ledgerApp = LedgerApp.Cosmos;
+    const ledgerApp = LedgerApp.MediBloc;
 
     return await this.useLedger(
       env,
@@ -84,7 +84,7 @@ export class LedgerService {
           ) {
             throw new KeplrError("ledger", 110, "Unmatched public key");
           }
-          // Cosmos App on Ledger doesn't support the coin type other than 118.
+          // MediBloc App on Ledger doesn't support the coin type other than 371.
           const signature: Uint8Array = await ledger.sign(bip44HDPath, message);
           // Notify UI Ledger signing succeeded only when Ledger initialization is tried again.
           if (retryCount > 0) {

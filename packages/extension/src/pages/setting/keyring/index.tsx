@@ -75,7 +75,7 @@ export const SetKeyRingPage: FunctionComponent = observer(() => {
           if (keyStore.type === "keystone") {
             paragraph = "Keystone";
           } else if (keyStore.type === "ledger") {
-            paragraph = `Ledger - m/44'/118'/${bip44HDPath.account}'${
+            paragraph = `Ledger - m/44'/371'/${bip44HDPath.account}'${
               bip44HDPath.change !== 0 || bip44HDPath.addressIndex !== 0
                 ? `/${bip44HDPath.change}/${bip44HDPath.addressIndex}`
                 : ""

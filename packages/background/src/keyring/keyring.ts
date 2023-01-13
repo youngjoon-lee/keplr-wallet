@@ -399,12 +399,12 @@ export class KeyRing {
     // Get public key first
     const publicKey = await this.ledgerKeeper.getPublicKey(
       env,
-      LedgerApp.Cosmos,
+      LedgerApp.MediBloc,
       bip44HDPath
     );
 
     const pubKeys = {
-      [LedgerApp.Cosmos]: publicKey,
+      [LedgerApp.MediBloc]: publicKey,
     };
 
     const keyStore = await KeyRing.CreateLedgerKeyStore(
@@ -479,7 +479,7 @@ export class KeyRing {
         );
       } catch (e) {
         // Decode as bytes (Legacy representation)
-        pubKeys[LedgerApp.Cosmos] = Buffer.from(
+        pubKeys[LedgerApp.MediBloc] = Buffer.from(
           Buffer.from(cipherText).toString(),
           "hex"
         );
@@ -770,7 +770,7 @@ export class KeyRing {
       }
 
       const pubKey = new PubKeySecp256k1(
-        this.ensureLedgerPublicKey(LedgerApp.Cosmos)
+        this.ensureLedgerPublicKey(LedgerApp.MediBloc)
       );
 
       return {
@@ -921,7 +921,7 @@ export class KeyRing {
       return await this.ledgerKeeper.sign(
         env,
         KeyRing.getKeyStoreBIP44Path(this.keyStore),
-        await this.ensureLedgerPublicKey(LedgerApp.Cosmos),
+        await this.ensureLedgerPublicKey(LedgerApp.MediBloc),
         message
       );
     } else if (this.keyStore.type === "keystone") {
@@ -1201,12 +1201,12 @@ export class KeyRing {
     // Get public key first
     const publicKey = await this.ledgerKeeper.getPublicKey(
       env,
-      LedgerApp.Cosmos,
+      LedgerApp.MediBloc,
       bip44HDPath
     );
 
     const pubKeys = {
-      [LedgerApp.Cosmos]: publicKey,
+      [LedgerApp.MediBloc]: publicKey,
     };
 
     const keyStore = await KeyRing.CreateLedgerKeyStore(

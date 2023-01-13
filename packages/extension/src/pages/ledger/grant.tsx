@@ -169,7 +169,7 @@ export const LedgerGrantPage: FunctionComponent = observer(() => {
                     case "ethereum":
                       return "Ethereum";
                     default:
-                      return "Cosmos";
+                      return "MediBloc";
                   }
                 })(),
               }
